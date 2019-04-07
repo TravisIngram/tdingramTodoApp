@@ -24,3 +24,15 @@ Meteor.publish("tasks.all", function() {
     userId: { $exists: false }
   });
 });
+
+Meteor.methods({
+  // Method to insert a new task into the db
+  // This method will rely on the client passing in the text for the new task
+  // and then add another field for the time it was created.
+  createTodo: function(text) {
+    Tasks.insert({
+      text,
+      createdAt: new Date()
+    });
+  }
+});

@@ -16,11 +16,8 @@ Template.body.events({
     const target = event.target;
     const text = target.text.value;
 
-    // Insert a task into the collection
-    Tasks.insert({
-      text,
-      createdAt: new Date() // current time
-    });
+    // Call to the create method along with the text for the new task.
+    Meteor.call("createTodo", text);
 
     // Clear form
     target.text.value = "";
