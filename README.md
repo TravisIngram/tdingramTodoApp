@@ -31,3 +31,17 @@ I tried to build and run the app again and was presented with another error mess
 I'll remove the default package and see if it helps.
 
 The app builds and launches now. But the todo list is empty (which isn't correct based on the code) and I'm not able to add new tasks. There's one console error indicating access was denied.
+
+---
+
+So the two issues I have right now is an empty todo list when there should be 10 random items and an inability to add new tasks.
+
+Meteor is differnt from other framworks in that it doesn't use REST. Instead it uses a protocol they developed called Distributed Data Protocol (DDP). So instead of using REST methods for basic CRUD actions based on endpoints you write, you use use Meteor methods.
+
+This is pretty obvious when looking over the code used in this app.
+
+Because of this, when you send or try to retrieve data you have to specifically allow or deny the requests. So I can't create a new todo item and try to send that directly to the database, which makes sense. I'll need to modify the code on the client and server side to allow for this.
+
+As for the lack of initial items, that also has to do with this new model. In order to share data back and forth between the client and database, they set up a `publish` and `subscribe` metaphor. You specify the data you want to make available and `publish` it, which amounts to a query of some sort. Specific elements of the client can the `subscribe` to this data and display the results.
+
+So I need to publish the list of todo items I want displayed and then subscribe to that in order to make use of it on the client.
