@@ -1,4 +1,4 @@
-### Meteor Todo App Challenge
+## Meteor Todo App Challenge
 
 Initial Readme for this challenge.
 
@@ -10,11 +10,15 @@ I then added in the imports, client, and server files provided with the challeng
 
 ### Issues
 
+#### Initial build and launch
+
 I tried to launch the app using `meteor` to see where things were at, the current state. It failed to launch and I was presented with a number of error messages that I'll need to work through.
 
 The initial issues seems to be related to packages that are called but not currently installed within this project, specifically `Faker`. I'll add that and any others that might be missing using the `meteor add` command and see where that gets me.
 
 ---
+
+#### Missing Packages
 
 I added the necessary package, `gbit:faker`, which is a Meteor specific wrapper for `Faker`. It was added to the `packages` file but its dependencies weren't. Which seems odd. I'm also not sure why `Blaze`, `jQuery`, and `observe-sequence` were added to the `versions` file. I'll need to look up what that's for.
 
@@ -34,6 +38,8 @@ The app builds and launches now. But the todo list is empty (which isn't correct
 
 ---
 
+#### Missing Data
+
 So the two issues I have right now is an empty todo list when there should be 10 random items and an inability to add new tasks.
 
 Meteor is different from other frameworks in that it doesn't use REST. Instead it uses a protocol they developed called Distributed Data Protocol (DDP). So instead of using REST methods for basic CRUD actions based on endpoints you write, you use use Meteor methods.
@@ -47,6 +53,8 @@ As for the lack of initial items, that also has to do with this new model. In or
 So I need to publish the list of todo items I want displayed and then subscribe to that in order to make use of it on the client.
 
 ---
+
+#### Publish and Subscribe Implementation
 
 Adding the publish and subscribe methods was straightforward. Thankfully the Meteor documentation is pretty good. There's an entire section that covers the process, [Publications and Data Loading](https://guide.meteor.com/data-loading.html).
 
@@ -66,6 +74,35 @@ I added a corresponding subscribe method on the client side to enable the data t
 Meteor.subscribe("tasks.all");
 ```
 
-The Meteor CLI has a built in monitoring process so anytime you mondify a file the application is built and launched again. Once I added the changes listed above I was able to see the initial 10 todo items.
+The Meteor CLI has a built in monitoring process so anytime you modify a file the application is built and launched again. Once I added the changes listed above I was able to see the initial 10 todo items.
 
 I still can't add new items, update, or delete existing ones.
+
+---
+
+#### Query and Call Methods
+
+I need to add explicit methods for each type of query that I want to make to the db. It looks like there are at least three that need to be added, `insert`, `update`, and `remove`. These need to be added to the server side code. There also needs to be corresponding `calls` to each of theses methods when that data needs to be modified.
+
+Again, the documentation is pretty good. There's a whole section on [Methods](https://guide.meteor.com/methods.html) and how to use them.
+
+---
+
+I added a method to enable new tasks to be added. It's a pretty simplistic implementation and not ideal. But it works and should be sufficient for this challenge. In a real world app you'd want to include validation and error handling and of course tests.
+
+```
+Meteor.methods({
+  createTodo: function(text) {
+    Tasks.insert({
+      text,
+      createdAt: new Date()
+    });
+  }
+});
+```
+
+```
+Meteor.call("createTodo", text);
+```
+
+---
