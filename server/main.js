@@ -34,5 +34,17 @@ Meteor.methods({
       text,
       createdAt: new Date()
     });
+  },
+
+  // Method to update checked status of an item within the list
+  updateTodo: function(todoItem, checkedItem) {
+    Tasks.update(todoItem, {
+      $set: { checked: !checkedItem }
+    });
+  },
+
+  // Method to remove a specific todo item from the list
+  removeTodo: function(todoItem) {
+    Tasks.remove(todoItem);
   }
 });

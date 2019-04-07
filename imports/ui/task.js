@@ -1,17 +1,21 @@
-import { Template } from 'meteor/templating';
+import { Template } from "meteor/templating";
 
-import { Tasks } from '../api/tasks.js';
-
-import './task.html';
+import "./task.html";
 
 Template.task.events({
-  'click .toggle-checked'() {
-    // Set the checked property to the opposite of its current value
-    Tasks.update(this._id, {
-      $set: { checked: ! this.checked },
-    });
+  "click .toggle-checked"() {
+    // A call to the updateTodo method to, well, update whether an item has been
+    // checked or not.
+    // We need access to the specific ID as well as the current state
+    var todoItem = this._id;
+    var checkedItem = this.checked;
+    Meteor.call("updateTodo", todoItem, checkedItem);
   },
-  'click .delete'() {
-    Tasks.remove(this._id);
-  },
+
+  // Call to the remove todo method to, well, remove a todo item
+  // We need to include the specific ID of the item we want to remove
+  "click .delete"() {
+    var todoItem = this._id;
+    Meteor.call("removeTodo", todoItem);
+  }
 });
