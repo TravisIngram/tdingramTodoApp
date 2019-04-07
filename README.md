@@ -106,3 +106,7 @@ Meteor.call("createTodo", text);
 ```
 
 ---
+
+I added methods and calls to them to handle the updating of the checkbox and the ability to remove items all together. From what I can tell the app now runs without error as intended. It launches with ten random items displayed that can be checked off or removed entirely. A user can also add new tasks and check those off and remove them if they want.
+
+I think I'm ready to move on and add the text search functionality.
