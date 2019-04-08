@@ -110,3 +110,37 @@ Meteor.call("createTodo", text);
 I added methods and calls to them to handle the updating of the checkbox and the ability to remove items all together. From what I can tell the app now runs without error as intended. It launches with ten random items displayed that can be checked off or removed entirely. A user can also add new tasks and check those off and remove them if they want.
 
 I think I'm ready to move on and add the text search functionality.
+
+---
+
+#### Task Search
+
+There aren't many resources available detailing how to implement this type of functionality. There is one post I found which is what I used as my stating point.
+
+The basic concept of search relies on features of MongoDB. There is an option available that when enabled will index specific user specified values. This index can then be searched when making queries.
+
+Specifying the values you'd like to index is straightforward.
+
+```
+Tasks._ensureIndex({
+    text: "text"
+  });
+```
+
+Once that's been turned on so to speak, the next step is to set up a publish method on the server. This process is similar to what we did previously.
+
+```
+Meteor.publish("search.tasks", function(searchString) {
+  if (!searchString) {
+    return Tasks.find({});
+  } else {
+    return Tasks.find({
+      $text: { $search: searchString }
+    });
+  }
+});
+```
+
+I verified the index method was working via the Mongo CLI. The publish method looks correct but until I figure out the client side implementation I won't know for sure.
+
+---
