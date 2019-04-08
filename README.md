@@ -144,3 +144,5 @@ Meteor.publish("search.tasks", function(searchString) {
 I verified the index method was working via the Mongo CLI. The publish method looks correct but until I figure out the client side implementation I won't know for sure.
 
 ---
+
+I added a basic search field to the app that's based on the task input field. I also added the `Session` package as it seems necessary to be able to be able to store a search term for use in another function. The one write-up I found used it so that seems to make sense. We'll see.
