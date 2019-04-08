@@ -6,8 +6,14 @@ import { Tasks } from "../imports/api/tasks.js";
 
 Meteor.startup(() => {
   Tasks.remove({});
+
+  // Method used to initiate indexing of the text field within our collection.
+  Tasks._ensureIndex({
+    text: "text"
+  });
+
   let i;
-  for (i = 0; i < 10; i++) {
+  for (i = 0; i < 5; i++) {
     let doc = {
       text: faker.lorem.paragraph(),
       createdAt: new Date()
@@ -23,6 +29,17 @@ Meteor.publish("tasks.all", function() {
   return Tasks.find({
     userId: { $exists: false }
   });
+});
+
+// Publish method for returning the results of a search
+Meteor.publish("search.tasks", function(searchString) {
+  if (!searchString) {
+    return Tasks.find({});
+  } else {
+    return Tasks.find({
+      $text: { $search: searchString }
+    });
+  }
 });
 
 Meteor.methods({
