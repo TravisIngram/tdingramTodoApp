@@ -5,11 +5,18 @@
       <form class="new-task">
         <input type="text" name="text" placeholder="Type to add new tasks" />
       </form>
+      <form class="search-tasks">
+        <input
+          type="text"
+          name="text"
+          placeholder="Type to search within tasks"
+        />
+      </form>
     </header>
 
     <ul>
       {{#each tasks}}
-        {{> task}}
+      {{> task}}
       {{/each}}
     </ul>
   </div>
