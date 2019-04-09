@@ -146,3 +146,13 @@ I verified the index method was working via the Mongo CLI. The publish method lo
 ---
 
 I added a basic search field to the app that's based on the task input field. I also added the `Session` package as it seems necessary to be able to be able to store a search term for use in another function. The one write-up I found used it so that seems to make sense. We'll see.
+
+---
+
+#### Search issues
+
+I've been working on implementing serach for a while now. It's been challenging for many reasons but mainly because I don't have a firm understanding of Meteor. Which is to be expected given I only just started working with it. The frustration comes in because I have most of the pieces in place. I have a search form and am able to save user input for use in other parts of the application. I have enabled indexing of the specific field I need and can query it from the Mongo CLI so I know that part is working. The problem is to bring all these various pieces together.
+
+I am running short on time so have decided to try and make use of a package and see if that works. We'll see.
+
+---
