@@ -151,8 +151,10 @@ I added a basic search field to the app that's based on the task input field. I 
 
 #### Search issues
 
-I've been working on implementing serach for a while now. It's been challenging for many reasons but mainly because I don't have a firm understanding of Meteor. Which is to be expected given I only just started working with it. The frustration comes in because I have most of the pieces in place. I have a search form and am able to save user input for use in other parts of the application. I have enabled indexing of the specific field I need and can query it from the Mongo CLI so I know that part is working. The problem is to bring all these various pieces together.
+I've been working on implementing search for a while now. It's been challenging for many reasons but mainly because I don't have a firm understanding of Meteor. Which is to be expected given I only just started working with it. The frustration comes in because I have most of the pieces in place. I have a search form and am able to save user input for use in other parts of the application. I have enabled indexing of the specific field I need and can query it from the Mongo CLI so I know that part is working. The problem is to bring all these various pieces together.
 
 I am running short on time so have decided to try and make use of a package and see if that works. We'll see.
 
 ---
+
+I spent time trying to implement search using a package called [Easy Search](http://matteodem.github.io/meteor-easy-search/). I didn't have much luck. The documentation was rather sparse. I didn't find it too helpful. I'm not sure what I'll try next. It really feels like I'm missing something obvious but I'm not sure what.
