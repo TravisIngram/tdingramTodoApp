@@ -20,4 +20,5 @@ shell-server@0.4.0            # Server-side component of the `meteor shell` comm
 # Packages added after initial project creation
 gbit:faker                    # Wrapper for Faker, package used to generate fake data
 templating                    # Package used for .html template rendering
-session
+session                       # Package used to store values specific to the current session
+easy:search                   # Package used to enable search within the task db
