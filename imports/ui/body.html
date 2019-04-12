@@ -9,19 +9,19 @@
           placeholder="Type to add new tasks to the list"
         />
       </form>
-      <form class="search-tasks">
-        <input
-          type="text"
-          name="text"
-          placeholder="Type to search within tasks"
-        />
-      </form>
     </header>
-
+    <div class="search-header">
+      <h1>Search Tasks</h1>
+      {{> EasySearch.Input index=tasksIndex attributes=searchInputAttributes events=enter}}
+    </div>
+    {{#if showResults}}
+    <p>{{> searchResult}}</p>
+    {{else}}
     <ul>
       {{#each tasks}}
       {{> task}}
       {{/each}}
     </ul>
+    {{/if}}
   </div>
 </body>
