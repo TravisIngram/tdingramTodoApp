@@ -1,5 +1,5 @@
 import { Template } from "meteor/templating";
-import { Tasks } from "../api/tasks.js";
+import { Tasks, TasksIndex } from "../api/tasks.js";
 import { Session } from "meteor/session";
 
 import "./task.js";
@@ -25,16 +25,23 @@ Template.body.events({
     target.text.value = "";
   },
 
-  "submit .search-tasks"(event) {
-    event.preventDefault();
+  // Helper to initiate a search
+  "keydown .search-tasks"(event) {
+    console.log("starting search!");
+    if (event.key === "Enter") {
+      // Set a session value for search results to display the results view
+      Session.set("showResults", true);
+    }
+  },
 
-    const searchTarget = event.target;
-    const searchString = searchTarget.text.value;
+  // Helper to close the results view
+  "click .toggle-results"(event) {
+    console.log("closing search results.");
 
-    // Set a session value for the search term to make it available to other methods
-    Session.set("searchString", searchString);
-
-    searchTarget.text.value = "";
+    // Reset the search field upon dismissal of results.
+    document.getElementsByClassName("search-tasks")[0].value = "";
+    // Set a session value for search results to close the results view
+    Session.set("showResults", false);
   }
 });
 
@@ -42,5 +49,23 @@ Template.body.helpers({
   tasks: function() {
     // Show newest tasks at the top
     return Tasks.find({}, { sort: { createdAt: -1 } });
+  },
+
+  // Return the instance of the EasySearch index we created
+  tasksIndex: function() {
+    return TasksIndex;
+  },
+
+  // Return the value of 'showResults' from the session store.
+  showResults: function() {
+    return Session.get("showResults");
+  },
+
+  // Attache attributes to the search field for styling and access.
+  searchInputAttributes: function() {
+    return {
+      placeholder: "Type here to search the tasks",
+      class: "search-tasks"
+    };
   }
 });

@@ -31,17 +31,6 @@ Meteor.publish("tasks.all", function() {
   });
 });
 
-// Publish method for returning the results of a search
-Meteor.publish("search.tasks", function(searchString) {
-  if (!searchString) {
-    return Tasks.find({});
-  } else {
-    return Tasks.find({
-      $text: { $search: searchString }
-    });
-  }
-});
-
 Meteor.methods({
   // Method to insert a new task into the db
   // This method will rely on the client passing in the text for the new task

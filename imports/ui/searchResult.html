@@ -1,0 +1,15 @@
+<template name="searchResult">
+  <ul>
+    {{#EasySearch.IfNoResults index=tasksIndex}}
+    <div class="no-results">
+      <h1>No results found!</h1>
+    </div>
+    {{/EasySearch.IfNoResults}}
+    {{#EasySearch.Each index=tasksIndex }}
+    <li>{{ text }}</li>
+    {{/EasySearch.Each}}
+  </ul>
+  <div>
+    <button class="toggle-results">Dismiss Results</button>
+  </div>
+</template>
