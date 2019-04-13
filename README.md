@@ -158,3 +158,13 @@ I am running short on time so have decided to try and make use of a package and 
 ---
 
 I spent time trying to implement search using a package called [Easy Search](http://matteodem.github.io/meteor-easy-search/). I didn't have much luck. The documentation was rather sparse. I didn't find it too helpful. I'm not sure what I'll try next. It really feels like I'm missing something obvious but I'm not sure what.
+
+#### Easy Search
+
+I spent more time with the EasySearch package and was able to get it implemented. I can't say exactly what my original issue was. As I said, the documentation isn't great and given the size of the user base there aren't many resources available online. But after continuing to work through the issues I was having I did get running in an acceptable manner.
+
+I think one problem I had stemmed from the fact I started implementing a solution on my own and then swapped over to something else. The two weren't compatible and were fighting so to speak. After stripping out most of my original code I was able to get the ES package up and running and from there it was just a matter of the templates and helpers and styling. I left comments so it should be relatively clear what I was doing and how things fit together.
+
+I'm going to move these comments to a separate Gist so as not to clutter up the main Readme.
+
+It can be found [here](https://gist.github.com/TravisIngram/b1740f403b0af86c38f3a9a5fb1109dc).
